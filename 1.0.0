@@ -1,0 +1,292 @@
+Requirement already satisfied: numpy in c:\users\it-programmer\appdata\local\programs\python\python310\lib\site-packages (2.2.5)
+Collecting streamlit
+  Downloading streamlit-1.45.1-py3-none-any.whl (9.9 MB)
+     ---------------------------------------- 9.9/9.9 MB 2.0 MB/s eta 0:00:00
+Collecting streamlit-drawable-canvas
+  Downloading streamlit_drawable_canvas-0.9.3-py3-none-any.whl (1.2 MB)
+     ---------------------------------------- 1.2/1.2 MB 2.0 MB/s eta 0:00:00
+Collecting opencv-python
+  Using cached opencv_python-4.11.0.86-cp37-abi3-win_amd64.whl (39.5 MB)
+Collecting matplotlib
+  Using cached matplotlib-3.10.3-cp310-cp310-win_amd64.whl (8.1 MB)
+Collecting pillow
+  Using cached pillow-11.2.1-cp310-cp310-win_amd64.whl (2.7 MB)
+Collecting jupyter
+  Downloading jupyter-1.1.1-py2.py3-none-any.whl (2.7 kB)
+Requirement already satisfied: typing-extensions<5,>=4.4.0 in c:\users\it-programmer\appdata\local\programs\python\python310\lib\site-packages (from streamlit) (4.13.2)
+Collecting gitpython!=3.1.19,<4,>=3.0.7
+  Downloading GitPython-3.1.44-py3-none-any.whl (207 kB)
+     ------------------------------------ 207.6/207.6 kB 972.2 kB/s eta 0:00:00
+Collecting click<9,>=7.0
+  Downloading click-8.2.1-py3-none-any.whl (102 kB)
+     -------------------------------------- 102.2/102.2 kB 1.2 MB/s eta 0:00:00
+Collecting protobuf<7,>=3.20
+  Downloading protobuf-6.31.1-cp310-abi3-win_amd64.whl (435 kB)
+     -------------------------------------- 435.3/435.3 kB 1.7 MB/s eta 0:00:00
+Collecting blinker<2,>=1.5.0
+  Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+Requirement already satisfied: requests<3,>=2.27 in c:\users\it-programmer\appdata\local\programs\python\python310\lib\site-packages (from streamlit) (2.32.3)
+Collecting pydeck<1,>=0.8.0b4
+  Downloading pydeck-0.9.1-py2.py3-none-any.whl (6.9 MB)
+     ---------------------------------------- 6.9/6.9 MB 1.9 MB/s eta 0:00:00
+Collecting packaging<25,>=20
+  Using cached packaging-24.2-py3-none-any.whl (65 kB)
+Collecting cachetools<6,>=4.0
+  Downloading cachetools-5.5.2-py3-none-any.whl (10 kB)
+Collecting pyarrow>=7.0
+  Using cached pyarrow-20.0.0-cp310-cp310-win_amd64.whl (25.8 MB)
+Collecting pandas<3,>=1.4.0
+  Using cached pandas-2.2.3-cp310-cp310-win_amd64.whl (11.6 MB)
+Collecting tornado<7,>=6.0.3
+  Downloading tornado-6.5.1-cp39-abi3-win_amd64.whl (444 kB)
+     -------------------------------------- 444.8/444.8 kB 1.3 MB/s eta 0:00:00
+Collecting tenacity<10,>=8.1.0
+  Using cached tenacity-9.1.2-py3-none-any.whl (28 kB)
+Collecting altair<6,>=4.0
+  Downloading altair-5.5.0-py3-none-any.whl (731 kB)
+     -------------------------------------- 731.2/731.2 kB 1.4 MB/s eta 0:00:00
+Collecting watchdog<7,>=2.1.5
+  Downloading watchdog-6.0.0-py3-none-win_amd64.whl (79 kB)
+     -------------------------------------- 79.1/79.1 kB 871.3 kB/s eta 0:00:00
+Collecting toml<2,>=0.10.1
+  Downloading toml-0.10.2-py2.py3-none-any.whl (16 kB)
+Collecting python-dateutil>=2.7
+  Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+Collecting fonttools>=4.22.0
+  Downloading fonttools-4.58.1-cp310-cp310-win_amd64.whl (2.2 MB)
+     ---------------------------------------- 2.2/2.2 MB 2.0 MB/s eta 0:00:00
+Collecting pyparsing>=2.3.1
+  Using cached pyparsing-3.2.3-py3-none-any.whl (111 kB)
+Collecting cycler>=0.10
+  Using cached cycler-0.12.1-py3-none-any.whl (8.3 kB)
+Collecting kiwisolver>=1.3.1
+  Using cached kiwisolver-1.4.8-cp310-cp310-win_amd64.whl (71 kB)
+Collecting contourpy>=1.0.1
+  Using cached contourpy-1.3.2-cp310-cp310-win_amd64.whl (221 kB)
+Collecting jupyter-console
+  Downloading jupyter_console-6.6.3-py3-none-any.whl (24 kB)
+Collecting ipywidgets
+  Downloading ipywidgets-8.1.7-py3-none-any.whl (139 kB)
+     -------------------------------------- 139.8/139.8 kB 4.0 MB/s eta 0:00:00
+Collecting jupyterlab
+  Downloading jupyterlab-4.4.3-py3-none-any.whl (12.3 MB)
+     ---------------------------------------- 12.3/12.3 MB 2.5 MB/s eta 0:00:00
+Collecting nbconvert
+  Downloading nbconvert-7.16.6-py3-none-any.whl (258 kB)
+     -------------------------------------- 258.5/258.5 kB 3.2 MB/s eta 0:00:00
+Collecting notebook
+  Downloading notebook-7.4.3-py3-none-any.whl (14.3 MB)
+     ---------------------------------------- 14.3/14.3 MB 2.0 MB/s eta 0:00:00
+Collecting ipykernel
+  Downloading ipykernel-6.29.5-py3-none-any.whl (117 kB)
+     -------------------------------------- 117.2/117.2 kB 2.3 MB/s eta 0:00:00
+Collecting narwhals>=1.14.2
+  Downloading narwhals-1.41.0-py3-none-any.whl (357 kB)
+     -------------------------------------- 358.0/358.0 kB 2.2 MB/s eta 0:00:00
+Collecting jinja2
+  Using cached jinja2-3.1.6-py3-none-any.whl (134 kB)
+Collecting jsonschema>=3.0
+  Downloading jsonschema-4.24.0-py3-none-any.whl (88 kB)
+     ---------------------------------------- 88.7/88.7 kB 2.5 MB/s eta 0:00:00
+Requirement already satisfied: colorama in c:\users\it-programmer\appdata\local\programs\python\python310\lib\site-packages (from click<9,>=7.0->streamlit) (0.4.6)
+Collecting gitdb<5,>=4.0.1
+  Downloading gitdb-4.0.12-py3-none-any.whl (62 kB)
+     ---------------------------------------- 62.8/62.8 kB 1.7 MB/s eta 0:00:00
+Collecting tzdata>=2022.7
+  Using cached tzdata-2025.2-py2.py3-none-any.whl (347 kB)
+Collecting pytz>=2020.1
+  Using cached pytz-2025.2-py2.py3-none-any.whl (509 kB)
+Collecting six>=1.5
+  Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)
+Requirement already satisfied: urllib3<3,>=1.21.1 in c:\users\it-programmer\appdata\local\programs\python\python310\lib\site-packages (from requests<3,>=2.27->streamlit) (2.4.0)
+Requirement already satisfied: certifi>=2017.4.17 in c:\users\it-programmer\appdata\local\programs\python\python310\lib\site-packages (from requests<3,>=2.27->streamlit) (2025.4.26)
+Requirement already satisfied: charset-normalizer<4,>=2 in c:\users\it-programmer\appdata\local\programs\python\python310\lib\site-packages (from requests<3,>=2.27->streamlit) (3.4.2)
+Requirement already satisfied: idna<4,>=2.5 in c:\users\it-programmer\appdata\local\programs\python\python310\lib\site-packages (from requests<3,>=2.27->streamlit) (3.10)
+Collecting ipython>=7.23.1
+  Downloading ipython-8.36.0-py3-none-any.whl (831 kB)
+     -------------------------------------- 831.1/831.1 kB 4.0 MB/s eta 0:00:00
+Collecting matplotlib-inline>=0.1
+  Downloading matplotlib_inline-0.1.7-py3-none-any.whl (9.9 kB)
+Collecting comm>=0.1.1
+  Downloading comm-0.2.2-py3-none-any.whl (7.2 kB)
+Collecting nest-asyncio
+  Downloading nest_asyncio-1.6.0-py3-none-any.whl (5.2 kB)
+Collecting pyzmq>=24
+  Downloading pyzmq-26.4.0-cp310-cp310-win_amd64.whl (643 kB)
+     -------------------------------------- 643.8/643.8 kB 1.8 MB/s eta 0:00:00
+Collecting debugpy>=1.6.5
+  Downloading debugpy-1.8.14-cp310-cp310-win_amd64.whl (5.2 MB)
+     ---------------------------------------- 5.2/5.2 MB 1.7 MB/s eta 0:00:00
+Collecting traitlets>=5.4.0
+  Downloading traitlets-5.14.3-py3-none-any.whl (85 kB)
+     ---------------------------------------- 85.4/85.4 kB 1.2 MB/s eta 0:00:00
+Collecting psutil
+  Using cached psutil-7.0.0-cp37-abi3-win_amd64.whl (244 kB)
+Collecting jupyter-core!=5.0.*,>=4.12
+  Downloading jupyter_core-5.8.1-py3-none-any.whl (28 kB)
+Collecting jupyter-client>=6.1.12
+  Downloading jupyter_client-8.6.3-py3-none-any.whl (106 kB)
+     -------------------------------------- 106.1/106.1 kB 3.0 MB/s eta 0:00:00
+Collecting jupyterlab_widgets~=3.0.15
+  Downloading jupyterlab_widgets-3.0.15-py3-none-any.whl (216 kB)
+     -------------------------------------- 216.6/216.6 kB 2.6 MB/s eta 0:00:00
+Collecting widgetsnbextension~=4.0.14
+  Downloading widgetsnbextension-4.0.14-py3-none-any.whl (2.2 MB)
+     ---------------------------------------- 2.2/2.2 MB 2.7 MB/s eta 0:00:00
+Collecting prompt-toolkit>=3.0.30
+  Downloading prompt_toolkit-3.0.51-py3-none-any.whl (387 kB)
+     -------------------------------------- 387.8/387.8 kB 1.7 MB/s eta 0:00:00
+Collecting pygments
+  Using cached pygments-2.19.1-py3-none-any.whl (1.2 MB)
+Collecting httpx>=0.25.0
+  Using cached httpx-0.28.1-py3-none-any.whl (73 kB)
+Collecting jupyterlab-server<3,>=2.27.1
+  Downloading jupyterlab_server-2.27.3-py3-none-any.whl (59 kB)
+     ---------------------------------------- 59.7/59.7 kB 3.3 MB/s eta 0:00:00
+Collecting jupyter-server<3,>=2.4.0
+  Downloading jupyter_server-2.16.0-py3-none-any.whl (386 kB)
+     -------------------------------------- 386.9/386.9 kB 3.5 MB/s eta 0:00:00
+Requirement already satisfied: setuptools>=41.1.0 in c:\users\it-programmer\appdata\local\programs\python\python310\lib\site-packages (from jupyterlab->jupyter) (65.5.0)
+Collecting async-lru>=1.0.0
+  Downloading async_lru-2.0.5-py3-none-any.whl (6.1 kB)
+Collecting tomli>=1.2.2
+  Using cached tomli-2.2.1-py3-none-any.whl (14 kB)
+Collecting notebook-shim>=0.2
+  Downloading notebook_shim-0.2.4-py3-none-any.whl (13 kB)
+Collecting jupyter-lsp>=2.0.0
+  Downloading jupyter_lsp-2.2.5-py3-none-any.whl (69 kB)
+     ---------------------------------------- 69.1/69.1 kB 3.7 MB/s eta 0:00:00
+Collecting jupyterlab-pygments
+  Downloading jupyterlab_pygments-0.3.0-py3-none-any.whl (15 kB)
+Collecting mistune<4,>=2.0.3
+  Downloading mistune-3.1.3-py3-none-any.whl (53 kB)
+     ---------------------------------------- 53.4/53.4 kB ? eta 0:00:00
+Collecting markupsafe>=2.0
+  Using cached MarkupSafe-3.0.2-cp310-cp310-win_amd64.whl (15 kB)
+Collecting pandocfilters>=1.4.1
+  Downloading pandocfilters-1.5.1-py2.py3-none-any.whl (8.7 kB)
+Collecting bleach[css]!=5.0.0
+  Downloading bleach-6.2.0-py3-none-any.whl (163 kB)
+     -------------------------------------- 163.4/163.4 kB 2.5 MB/s eta 0:00:00
+Collecting beautifulsoup4
+  Using cached beautifulsoup4-4.13.4-py3-none-any.whl (187 kB)
+Collecting nbclient>=0.5.0
+  Downloading nbclient-0.10.2-py3-none-any.whl (25 kB)
+Collecting nbformat>=5.7
+  Downloading nbformat-5.10.4-py3-none-any.whl (78 kB)
+     ---------------------------------------- 78.5/78.5 kB 1.5 MB/s eta 0:00:00
+Collecting defusedxml
+  Downloading defusedxml-0.7.1-py2.py3-none-any.whl (25 kB)
+Collecting webencodings
+  Downloading webencodings-0.5.1-py2.py3-none-any.whl (11 kB)
+Collecting tinycss2<1.5,>=1.1.0
+  Downloading tinycss2-1.4.0-py3-none-any.whl (26 kB)
+Collecting smmap<6,>=3.0.1
+  Downloading smmap-5.0.2-py3-none-any.whl (24 kB)
+Collecting anyio
+  Using cached anyio-4.9.0-py3-none-any.whl (100 kB)
+Collecting httpcore==1.*
+  Using cached httpcore-1.0.9-py3-none-any.whl (78 kB)
+Collecting h11>=0.16
+  Using cached h11-0.16.0-py3-none-any.whl (37 kB)
+Collecting exceptiongroup
+  Using cached exceptiongroup-1.3.0-py3-none-any.whl (16 kB)
+Collecting jedi>=0.16
+  Downloading jedi-0.19.2-py2.py3-none-any.whl (1.6 MB)
+     ---------------------------------------- 1.6/1.6 MB 1.3 MB/s eta 0:00:00
+Collecting decorator
+  Downloading decorator-5.2.1-py3-none-any.whl (9.2 kB)
+Collecting stack_data
+  Downloading stack_data-0.6.3-py3-none-any.whl (24 kB)
+Collecting attrs>=22.2.0
+  Using cached attrs-25.3.0-py3-none-any.whl (63 kB)
+Collecting jsonschema-specifications>=2023.03.6
+  Using cached jsonschema_specifications-2025.4.1-py3-none-any.whl (18 kB)
+Collecting referencing>=0.28.4
+  Using cached referencing-0.36.2-py3-none-any.whl (26 kB)
+Collecting rpds-py>=0.7.1
+  Using cached rpds_py-0.25.1-cp310-cp310-win_amd64.whl (231 kB)
+Collecting platformdirs>=2.5
+  Using cached platformdirs-4.3.8-py3-none-any.whl (18 kB)
+Collecting pywin32>=300
+  Downloading pywin32-310-cp310-cp310-win_amd64.whl (9.6 MB)
+     ---------------------------------------- 9.6/9.6 MB 1.8 MB/s eta 0:00:00
+Collecting websocket-client>=1.7
+  Downloading websocket_client-1.8.0-py3-none-any.whl (58 kB)
+     ---------------------------------------- 58.8/58.8 kB 3.0 MB/s eta 0:00:00
+Collecting jupyter-events>=0.11.0
+  Downloading jupyter_events-0.12.0-py3-none-any.whl (19 kB)
+Collecting overrides>=5.0
+  Downloading overrides-7.7.0-py3-none-any.whl (17 kB)
+Collecting send2trash>=1.8.2
+  Downloading Send2Trash-1.8.3-py3-none-any.whl (18 kB)
+Collecting jupyter-server-terminals>=0.4.4
+  Downloading jupyter_server_terminals-0.5.3-py3-none-any.whl (13 kB)
+Collecting prometheus-client>=0.9
+  Downloading prometheus_client-0.22.0-py3-none-any.whl (62 kB)
+     ---------------------------------------- 62.7/62.7 kB 3.3 MB/s eta 0:00:00
+Collecting terminado>=0.8.3
+  Downloading terminado-0.18.1-py3-none-any.whl (14 kB)
+Collecting pywinpty>=2.0.1
+  Downloading pywinpty-2.0.15-cp310-cp310-win_amd64.whl (1.4 MB)
+     ---------------------------------------- 1.4/1.4 MB 1.5 MB/s eta 0:00:00
+Collecting argon2-cffi>=21.1
+  Downloading argon2_cffi-23.1.0-py3-none-any.whl (15 kB)
+Collecting json5>=0.9.0
+  Downloading json5-0.12.0-py3-none-any.whl (36 kB)
+Collecting babel>=2.10
+  Downloading babel-2.17.0-py3-none-any.whl (10.2 MB)
+     ---------------------------------------- 10.2/10.2 MB 2.2 MB/s eta 0:00:00
+Collecting fastjsonschema>=2.15
+  Downloading fastjsonschema-2.21.1-py3-none-any.whl (23 kB)
+Collecting wcwidth
+  Downloading wcwidth-0.2.13-py2.py3-none-any.whl (34 kB)
+Collecting soupsieve>1.2
+  Using cached soupsieve-2.7-py3-none-any.whl (36 kB)
+Collecting sniffio>=1.1
+  Using cached sniffio-1.3.1-py3-none-any.whl (10 kB)
+Collecting argon2-cffi-bindings
+  Downloading argon2_cffi_bindings-21.2.0-cp36-abi3-win_amd64.whl (30 kB)
+Collecting parso<0.9.0,>=0.8.4
+  Downloading parso-0.8.4-py2.py3-none-any.whl (103 kB)
+     ------------------------------------ 103.7/103.7 kB 496.9 kB/s eta 0:00:00
+Collecting rfc3986-validator>=0.1.1
+  Downloading rfc3986_validator-0.1.1-py2.py3-none-any.whl (4.2 kB)
+Collecting python-json-logger>=2.0.4
+  Downloading python_json_logger-3.3.0-py3-none-any.whl (15 kB)
+Collecting rfc3339-validator
+  Downloading rfc3339_validator-0.1.4-py2.py3-none-any.whl (3.5 kB)
+Requirement already satisfied: pyyaml>=5.3 in c:\users\it-programmer\appdata\local\programs\python\python310\lib\site-packages (from jupyter-events>=0.11.0->jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (6.0.2)
+Collecting pure-eval
+  Downloading pure_eval-0.2.3-py3-none-any.whl (11 kB)
+Collecting executing>=1.2.0
+  Downloading executing-2.2.0-py2.py3-none-any.whl (26 kB)
+Collecting asttokens>=2.1.0
+  Downloading asttokens-3.0.0-py3-none-any.whl (26 kB)
+Collecting fqdn
+  Downloading fqdn-1.5.1-py3-none-any.whl (9.1 kB)
+Collecting webcolors>=24.6.0
+  Downloading webcolors-24.11.1-py3-none-any.whl (14 kB)
+Collecting jsonpointer>1.13
+  Downloading jsonpointer-3.0.0-py2.py3-none-any.whl (7.6 kB)
+Collecting uri-template
+  Downloading uri_template-1.3.0-py3-none-any.whl (11 kB)
+Collecting isoduration
+  Downloading isoduration-20.11.0-py3-none-any.whl (11 kB)
+Collecting cffi>=1.0.1
+  Downloading cffi-1.17.1-cp310-cp310-win_amd64.whl (181 kB)
+     -------------------------------------- 181.3/181.3 kB 2.2 MB/s eta 0:00:00
+Collecting pycparser
+  Downloading pycparser-2.22-py3-none-any.whl (117 kB)
+     -------------------------------------- 117.6/117.6 kB 2.3 MB/s eta 0:00:00
+Collecting arrow>=0.15.0
+  Downloading arrow-1.3.0-py3-none-any.whl (66 kB)
+     ---------------------------------------- 66.4/66.4 kB 1.8 MB/s eta 0:00:00
+Collecting types-python-dateutil>=2.8.10
+  Downloading types_python_dateutil-2.9.0.20250516-py3-none-any.whl (14 kB)
+Installing collected packages: webencodings, wcwidth, pywin32, pytz, pure-eval, fastjsonschema, widgetsnbextension, websocket-client, webcolors, watchdog, uri-template, tzdata, types-python-dateutil, traitlets, tornado, tomli, toml, tinycss2, tenacity, soupsieve, sniffio, smmap, six, send2trash, rpds-py, rfc3986-validator, pyzmq, pywinpty, python-json-logger, pyparsing, pygments, pycparser, pyarrow, psutil, protobuf, prompt-toolkit, prometheus-client, platformdirs, pillow, parso, pandocfilters, packaging, overrides, opencv-python, nest-asyncio, narwhals, mistune, markupsafe, kiwisolver, jupyterlab_widgets, jupyterlab-pygments, jsonpointer, json5, h11, fqdn, fonttools, executing, exceptiongroup, defusedxml, decorator, debugpy, cycler, contourpy, click, cachetools, blinker, bleach, babel, attrs, async-lru, asttokens, terminado, stack_data, rfc3339-validator, referencing, python-dateutil, matplotlib-inline, jupyter-core, jinja2, jedi, httpcore, gitdb, comm, cffi, beautifulsoup4, anyio, pydeck, pandas, matplotlib, jupyter-server-terminals, jupyter-client, jsonschema-specifications, ipython, httpx, gitpython, arrow, argon2-cffi-bindings, jsonschema, isoduration, ipywidgets, ipykernel, argon2-cffi, nbformat, jupyter-console, altair, streamlit, nbclient, jupyter-events, streamlit-drawable-canvas, nbconvert, jupyter-server, notebook-shim, jupyterlab-server, jupyter-lsp, jupyterlab, notebook, jupyter
+  Attempting uninstall: packaging
+    Found existing installation: packaging 25.0
+    Uninstalling packaging-25.0:
+      Successfully uninstalled packaging-25.0
+Successfully installed altair-5.5.0 anyio-4.9.0 argon2-cffi-23.1.0 argon2-cffi-bindings-21.2.0 arrow-1.3.0 asttokens-3.0.0 async-lru-2.0.5 attrs-25.3.0 babel-2.17.0 beautifulsoup4-4.13.4 bleach-6.2.0 blinker-1.9.0 cachetools-5.5.2 cffi-1.17.1 click-8.2.1 comm-0.2.2 contourpy-1.3.2 cycler-0.12.1 debugpy-1.8.14 decorator-5.2.1 defusedxml-0.7.1 exceptiongroup-1.3.0 executing-2.2.0 fastjsonschema-2.21.1 fonttools-4.58.1 fqdn-1.5.1 gitdb-4.0.12 gitpython-3.1.44 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 ipykernel-6.29.5 ipython-8.36.0 ipywidgets-8.1.7 isoduration-20.11.0 jedi-0.19.2 jinja2-3.1.6 json5-0.12.0 jsonpointer-3.0.0 jsonschema-4.24.0 jsonschema-specifications-2025.4.1 jupyter-1.1.1 jupyter-client-8.6.3 jupyter-console-6.6.3 jupyter-core-5.8.1 jupyter-events-0.12.0 jupyter-lsp-2.2.5 jupyter-server-2.16.0 jupyter-server-terminals-0.5.3 jupyterlab-4.4.3 jupyterlab-pygments-0.3.0 jupyterlab-server-2.27.3 jupyterlab_widgets-3.0.15 kiwisolver-1.4.8 markupsafe-3.0.2 matplotlib-3.10.3 matplotlib-inline-0.1.7 mistune-3.1.3 narwhals-1.41.0 nbclient-0.10.2 nbconvert-7.16.6 nbformat-5.10.4 nest-asyncio-1.6.0 notebook-7.4.3 notebook-shim-0.2.4 opencv-python-4.11.0.86 overrides-7.7.0 packaging-24.2 pandas-2.2.3 pandocfilters-1.5.1 parso-0.8.4 pillow-11.2.1 platformdirs-4.3.8 prometheus-client-0.22.0 prompt-toolkit-3.0.51 protobuf-6.31.1 psutil-7.0.0 pure-eval-0.2.3 pyarrow-20.0.0 pycparser-2.22 pydeck-0.9.1 pygments-2.19.1 pyparsing-3.2.3 python-dateutil-2.9.0.post0 python-json-logger-3.3.0 pytz-2025.2 pywin32-310 pywinpty-2.0.15 pyzmq-26.4.0 referencing-0.36.2 rfc3339-validator-0.1.4 rfc3986-validator-0.1.1 rpds-py-0.25.1 send2trash-1.8.3 six-1.17.0 smmap-5.0.2 sniffio-1.3.1 soupsieve-2.7 stack_data-0.6.3 streamlit-1.45.1 streamlit-drawable-canvas-0.9.3 tenacity-9.1.2 terminado-0.18.1 tinycss2-1.4.0 toml-0.10.2 tomli-2.2.1 tornado-6.5.1 traitlets-5.14.3 types-python-dateutil-2.9.0.20250516 tzdata-2025.2 uri-template-1.3.0 watchdog-6.0.0 wcwidth-0.2.13 webcolors-24.11.1 webencodings-0.5.1 websocket-client-1.8.0 widgetsnbextension-4.0.14

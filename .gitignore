@@ -1,0 +1,6 @@
+#vendor/
+.env
+writable/logs/
+writable/debugbar/
+writable/session/*
+!writable/session/index.html
