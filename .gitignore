@@ -1,4 +1,4 @@
-#vendor/
+vendor/
 .env
 writable/logs/
 writable/debugbar/
