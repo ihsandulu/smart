@@ -1,4 +1,5 @@
 <?php
+
 /**
  * MQTT STDIN → CI4 API
  * Project: M1
@@ -10,6 +11,7 @@ if (php_sapi_name() !== 'cli') {
 }
 
 while (($line = fgets(STDIN)) !== false) {
+    file_put_contents('/tmp/mqtt_debug.log', $line . PHP_EOL, FILE_APPEND);
 
     $line = trim($line);
     if ($line === '') continue;
