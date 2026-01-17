@@ -4,7 +4,7 @@ namespace App\Models\master;
 
 use App\Models\core_m;
 
-class mucustomer_m extends core_m
+class mcustomer_m extends core_m
 {
     public function data()
     {
