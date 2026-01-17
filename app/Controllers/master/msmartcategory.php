@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controllers\transaction;
+namespace App\Controllers\master;
 
 
 use App\Controllers\BaseController;
 
-class quotationd extends BaseController
+class msmartcategory extends BaseController
 {
 
     protected $sesi_user;
@@ -18,9 +18,8 @@ class quotationd extends BaseController
 
     public function index()
     {
-        $data = new \App\Models\transaction\quotationd_m();
+        $data = new \App\Models\master\msmartcategory_m();
         $data = $data->data();
-        $data["title"]="Detail Quotation";
-        return view('transaction/quotationd_v', $data);
+        return view('master/msmartcategory_v', $data);
     }
 }

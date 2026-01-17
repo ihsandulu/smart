@@ -22,4 +22,5 @@ $routes->add('/midentity', 'master\midentity::index');
 $routes->add('/mcustomer', 'master\mcustomer::index');
 $routes->add('/msatuan', 'master\msatuan::index');
 $routes->add('/mcustomer', 'master\mcustomer::index');
+$routes->add('/msmartcategory', 'master\msmartcategory::index');
 

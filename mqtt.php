@@ -17,7 +17,7 @@ while (($line = fgets(STDIN)) !== false) {
     // parsing
     [$topic, $payload] = explode(' ', $line, 2);
 
-    $stmt = $db->prepare("INSERT INTO mqtt_messages (topic, payload, created_at) VALUES (?, ?, NOW())");
+    $stmt = $db->prepare("INSERT INTO mqtt (mqtt_topic, mqtt_payload, mqtt_created_at) VALUES (?, ?, NOW())");
     $stmt->bind_param("ss", $topic, $payload);
     $stmt->execute();
 }
