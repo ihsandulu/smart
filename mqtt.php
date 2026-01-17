@@ -14,10 +14,42 @@ while (($line = fgets(STDIN)) !== false) {
 
     file_put_contents('/tmp/mqtt_debug.log', "DAPAT: $line\n", FILE_APPEND);
 
-    // parsing
-    [$topic, $payload] = explode(' ', $line, 2);
+    // parsing topic dan payload dari mosquitto_sub
+    [$topic, $payload] = explode(' ', trim($line), 2);
 
-    $stmt = $db->prepare("INSERT INTO mqtt (mqtt_topic, mqtt_payload, mqtt_created_at) VALUES (?, ?, NOW())");
-    $stmt->bind_param("ss", $topic, $payload);
+    // parsing payload: user_id/smartcategory_id/mqtt_number
+    $parts = explode('/', $payload);
+
+    // validasi jumlah elemen
+    if (count($parts) !== 3) {
+        // payload rusak → jangan simpan
+        return;
+    }
+
+    $user_id          = (int) $parts[0];
+    $smartcategory_id = (int) $parts[1];
+    $mqtt_number      = (int) $parts[2];
+
+
+    $stmt = $db->prepare("
+        INSERT INTO mqtt (
+            mqtt_topic,
+            mqtt_payload,
+            user_id,
+            smartcategory_id,
+            mqtt_number,
+            mqtt_created_at
+        ) VALUES (?, ?, ?, ?, ?, NOW())
+        ");
+
+    $stmt->bind_param(
+        "ssiii",
+        $topic,
+        $payload,
+        $user_id,
+        $smartcategory_id,
+        $mqtt_number
+    );
+
     $stmt->execute();
 }
