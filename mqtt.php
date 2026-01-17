@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$db = new mysqli("localhost", "DB_USER", "DB_PASS", "DB_NAME");
+$db = new mysqli("localhost", "smart_smart", "%w5K6b*OE@Ea!GnG", "smart_smart");
 if ($db->connect_error) {
     file_put_contents('/tmp/mqtt_debug.log', "DB ERROR\n", FILE_APPEND);
     exit;
