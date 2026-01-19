@@ -5,3 +5,4 @@ writable/debugbar/
 writable/session/*
 !writable/session/index.html
 app/Config/app.php
+mqtt-89ea3-firebase-adminsdk-fbsvc-ce15f1d356.json
