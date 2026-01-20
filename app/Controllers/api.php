@@ -30,8 +30,8 @@ class api extends BaseController
 
         // Ambil data POST
         $user_id   = $request->getPost('user_id');
-        $token     = $request->getPost('token');
-        $platform  = $request->getPost('platform') ?? 'android';
+        $token     = $request->getPost('fcmtokens_token');
+        $platform  = $request->getPost('fcmtokens_platform') ?? 'android';
 
         // Validasi wajib
         if (!$user_id || !$token) {
