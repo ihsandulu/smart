@@ -26,6 +26,12 @@ class api extends BaseController
 
     public function saveToken()
     {
+        file_put_contents(
+            WRITEPATH . 'logs/hit.txt',
+            date('Y-m-d H:i:s') . " HIT\n",
+            FILE_APPEND
+        );
+
         // ✅ CORS (debug dulu)
         $this->response->setHeader('Access-Control-Allow-Origin', '*');
         $this->response->setHeader('Access-Control-Allow-Headers', 'Content-Type');
