@@ -26,23 +26,23 @@ class api extends BaseController
 
     public function saveToken()
     {
-        $request = $this->request;
+        // ⬇️ AMBIL JSON BODY
+        $data = $this->request->getJSON(true);
 
-        // Ambil data POST
-        $user_id   = $request->getPost('user_id');
-        $token     = $request->getPost('fcmtokens_token');
-        $platform  = $request->getPost('fcmtokens_platform') ?? 'android';
+        // Mapping data JSON
+        $user_id  = $data['user_id'] ?? null;
+        $token    = $data['fcmtokens_token'] ?? null;
+        $platform = $data['fcmtokens_platform'] ?? 'android';
 
         // Validasi wajib
         if (!$user_id || !$token) {
-            return $this->response->setJSON([
+            return $this->respond([
                 'status'  => false,
-                'message' => 'user_id dan token wajib diisi'
-            ])->setStatusCode(400);
+                'message' => 'user_id dan fcmtokens_token wajib diisi'
+            ], 400);
         }
 
-        $db = $this->db;
-        $builder = $db->table('fcmtokens');
+        $builder = $this->db->table('fcmtokens');
 
         // Cek apakah token sudah ada
         $existing = $builder
@@ -53,20 +53,22 @@ class api extends BaseController
         $now = date('Y-m-d H:i:s');
 
         if ($existing) {
+
             // UPDATE
             $builder
                 ->where('fcmtokens_id', $existing->fcmtokens_id)
                 ->update([
-                    'user_id'               => $user_id,
-                    'fcmtokens_platform'    => $platform,
-                    'fcmtokens_updated_at'  => $now
+                    'user_id'              => $user_id,
+                    'fcmtokens_platform'   => $platform,
+                    'fcmtokens_updated_at' => $now
                 ]);
 
-            return $this->response->setJSON([
+            return $this->respond([
                 'status'  => true,
                 'message' => 'FCM token diperbarui'
             ]);
         } else {
+
             // INSERT
             $builder->insert([
                 'user_id'              => $user_id,
@@ -75,7 +77,7 @@ class api extends BaseController
                 'fcmtokens_updated_at' => $now
             ]);
 
-            return $this->response->setJSON([
+            return $this->respond([
                 'status'  => true,
                 'message' => 'FCM token disimpan'
             ]);
