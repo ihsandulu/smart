@@ -26,6 +26,11 @@ class api extends BaseController
 
     public function saveToken()
     {
+        // ✅ CORS (debug dulu)
+        $this->response->setHeader('Access-Control-Allow-Origin', '*');
+        $this->response->setHeader('Access-Control-Allow-Headers', 'Content-Type');
+        $this->response->setHeader('Access-Control-Allow-Methods', 'POST');
+
         // ⬇️ AMBIL JSON BODY
         $data = $this->request->getJSON(true);
 
