@@ -24,5 +24,15 @@ class api extends BaseController
         echo "Page Not Found!";
     }
 
+    public function saveToken()
+    {
+        $input = $this->request->getJSON(true);
+
+        return $this->respond([
+            'status' => 'ok',
+            'data'   => $input
+        ]);
+    }
+
 
 }
