@@ -21,25 +21,23 @@ function fcm_send($deviceToken, $title, $body, $data = [])
         "message" => [
             "token" => $deviceToken,
 
-            // NOTIF YANG DITAMPILKAN ANDROID
+            "android" => [
+                "priority" => "HIGH",
+                "notification" => [
+                    "channel_id" => "default", // 🔥 HARUS SAMA
+                    "sound" => "default"
+                ]
+            ],
+
             "notification" => [
                 "title" => $title,
                 "body"  => $body
             ],
 
-            // DATA TAMBAHAN (AMAN)
-            "data" => $data,
-
-            // 🔥 INI KUNCI SUPAYA BUNYI & REALTIME
-            "android" => [
-                "priority" => "HIGH",
-                "notification" => [
-                    "sound" => "default",
-                    "channel_id" => "default"
-                ]
-            ]
+            "data" => $data
         ]
     ];
+
 
 
     $ch = curl_init($url);
