@@ -9,7 +9,7 @@ require __DIR__ . '/fcm.php';
  * sementara hardcode
  * (nanti bisa ambil dari DB berdasarkan user_id)
  */
-$DEVICE_TOKEN_ANDROID = 'ISI_TOKEN_ANDROID';
+// $DEVICE_TOKEN_ANDROID = 'ISI_TOKEN_ANDROID';
 /* ============================================== */
 
 $db = new mysqli("localhost", "smart_smart", "%w5K6b*OE@Ea!GnG", "smart_smart");
@@ -78,6 +78,37 @@ while (($line = fgets(STDIN)) !== false) {
     $stmt->execute();
     $stmt->close();
 
+    /* ================== AMBIL TOKEN DARI DB ================== */
+
+    $tokens = [];
+
+    $stmt = $db->prepare("
+    SELECT fcmtokens_token
+    FROM fcmtokens
+    WHERE user_id = ?
+");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    while ($row = $result->fetch_assoc()) {
+        $tokens[] = $row['fcmtokens_token'];
+    }
+
+    $stmt->close();
+
+    /* jika user belum punya device */
+    if (empty($tokens)) {
+        file_put_contents(
+            WRITEPATH . 'logs/mqtt_worker.log',
+            "NO TOKEN FOR USER $user_id\n",
+            FILE_APPEND
+        );
+        continue;
+    }
+
+
+
     /* ================== TAMBAHAN FCM ================== */
 
     if ($mqtt_tipe === 0) {
@@ -88,24 +119,28 @@ while (($line = fgets(STDIN)) !== false) {
         $body  = "Aktivitas non-sensor oleh $mqtt_username";
     }
 
-    $fcm_res = fcm_send(
-        $DEVICE_TOKEN_ANDROID,
-        $title,
-        $body,
-        [
-            'user_id'           => (string)$user_id,
-            'smartcategory_id'  => (string)$smartcategory_id,
-            'mqtt_number'       => (string)$mqtt_number,
-            'mqtt_username'     => $mqtt_username,
-            'mqtt_tipe'         => (string)$mqtt_tipe
-        ]
-    );
+    foreach ($tokens as $token) {
 
-    file_put_contents(
-        '/tmp/mqtt_debug.log',
-        "FCM SENT: $fcm_res\n",
-        FILE_APPEND
-    );
+        $fcm_res = fcm_send(
+            $token,
+            $title,
+            $body,
+            [
+                'user_id'           => (string)$user_id,
+                'smartcategory_id'  => (string)$smartcategory_id,
+                'mqtt_number'       => (string)$mqtt_number,
+                'mqtt_username'     => $mqtt_username,
+                'mqtt_tipe'         => (string)$mqtt_tipe
+            ]
+        );
+
+        file_put_contents(
+            WRITEPATH . 'logs/mqtt_worker.log',
+            "FCM SENT TO $token : $fcm_res\n",
+            FILE_APPEND
+        );
+    }
+
 
     /* ================================================== */
 }
