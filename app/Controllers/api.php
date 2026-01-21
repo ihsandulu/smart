@@ -26,6 +26,63 @@ class api extends BaseController
 
     public function saveToken()
     {
+        // Coba ambil JSON dulu
+        $data = $this->request->getJSON(true);
+
+        if (json_last_error() !== JSON_ERROR_NONE || empty($data)) {
+            // Kalau bukan JSON, fallback ke POST FORM
+            $data = $this->request->getPost();
+        }
+
+        $user_id  = $data['user_id'] ?? null;
+        $token    = $data['fcmtokens_token'] ?? null;
+        $platform = $data['fcmtokens_platform'] ?? 'android';
+
+        if (!$user_id || !$token) {
+            return $this->respond([
+                'status' => false,
+                'message' => 'user_id dan fcmtokens_token wajib diisi'
+            ], 400);
+        }
+
+        $builder = $this->db->table('fcmtokens');
+        $now = date('Y-m-d H:i:s');
+
+        $existing = $builder
+            ->where('fcmtokens_token', $token)
+            ->get()
+            ->getRow();
+
+        if ($existing) {
+            $builder->where('fcmtokens_id', $existing->fcmtokens_id)
+                ->update([
+                    'user_id' => $user_id,
+                    'fcmtokens_platform' => $platform,
+                    'fcmtokens_updated_at' => $now
+                ]);
+
+            return $this->respond([
+                'status' => true,
+                'message' => 'FCM token diperbarui'
+            ]);
+        }
+
+        $builder->insert([
+            'user_id' => $user_id,
+            'fcmtokens_token' => $token,
+            'fcmtokens_platform' => $platform,
+            'fcmtokens_updated_at' => $now
+        ]);
+
+        return $this->respond([
+            'status' => true,
+            'message' => 'FCM token disimpan'
+        ]);
+    }
+
+
+    public function saveToken1()
+    {
         file_put_contents(
             WRITEPATH . 'logs/hit.txt',
             date('Y-m-d H:i:s') . " HIT\n",
