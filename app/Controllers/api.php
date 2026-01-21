@@ -26,17 +26,11 @@ class api extends BaseController
 
     public function saveToken()
     {
-        // Coba ambil JSON dulu
-        $data = $this->request->getJSON(true);
+        $user_id = $this->request->getPost('user_id');
+        $token   = $this->request->getPost('fcmtokens_token');
+        $platform    = $this->request->getPost('fcmtokens_platform');
 
-        if (json_last_error() !== JSON_ERROR_NONE || empty($data)) {
-            // Kalau bukan JSON, fallback ke POST FORM
-            $data = $this->request->getPost();
-        }
 
-        $user_id  = $data['user_id'] ?? null;
-        $token    = $data['fcmtokens_token'] ?? null;
-        $platform = $data['fcmtokens_platform'] ?? 'android';
 
         if (!$user_id || !$token) {
             return $this->respond([
