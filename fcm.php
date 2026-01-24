@@ -21,22 +21,23 @@ function fcm_send($deviceToken, $title, $body, $data = [])
         "message" => [
             "token" => $deviceToken,
 
-            "android" => [
-                "priority" => "HIGH",
-                "notification" => [
-                    "channel_id" => "default", // 🔥 HARUS SAMA
-                    "sound" => "default"
-                ]
-            ],
-
             "notification" => [
                 "title" => $title,
                 "body"  => $body
             ],
 
+            "android" => [
+                "priority" => "HIGH",
+                "notification" => [
+                    "channel_id" => "alert_channel",
+                    "sound" => "default"
+                ]
+            ],
+
             "data" => $data
         ]
     ];
+
 
 
 
