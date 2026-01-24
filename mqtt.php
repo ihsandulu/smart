@@ -133,7 +133,8 @@ while (($line = fgets(STDIN)) !== false) {
                 'smartcategory_id'  => (string)$smartcategory_id,
                 'mqtt_number'       => (string)$mqtt_number,
                 'mqtt_username'     => $mqtt_username,
-                'mqtt_tipe'         => (string)$mqtt_tipe
+                'mqtt_tipe'         => (string)$mqtt_tipe,
+                'sound'             => $sound
             ]
         );
 
