@@ -134,8 +134,10 @@ while (($line = fgets(STDIN)) !== false) {
             ]
         );
 
+        $logFile = '/home/smart.qithy.com/public_html/writable/logs/mqtt_worker.log';
+
         file_put_contents(
-            WRITEPATH . 'logs/mqtt_worker.log',
+            $logFile,
             "FCM SENT TO $token : $fcm_res\n",
             FILE_APPEND
         );
