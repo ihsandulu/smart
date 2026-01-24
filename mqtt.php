@@ -1,60 +1,116 @@
 <?php
-require __DIR__ . '/vendor/autoload.php';
-use Google\Client;
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-function fcm_send($sound, $deviceToken, $title, $body, $data = [])
-{
-    echo "FCM SEND FUNCTION CALLED\n";
+/* ================== TAMBAHAN ================== */
+require __DIR__ . '/fcm.php';  // versi debug-ready
+/* ============================================== */
 
-    $projectId = 'mqtt-89ea3';
-    $serviceAccount = __DIR__ . '/mqtt-89ea3-firebase-adminsdk-fbsvc-ce15f1d356.json';
+// ======== Koneksi DB ========
+$db = new mysqli("localhost", "smart_smart", "%w5K6b*OE@Ea!GnG", "smart_smart");
+if ($db->connect_error) {
+    file_put_contents('/tmp/mqtt_debug.log', "DB ERROR\n", FILE_APPEND);
+    exit;
+}
 
-    $client = new Client();
-    $client->setAuthConfig($serviceAccount);
-    $client->addScope('https://www.googleapis.com/auth/firebase.messaging');
+// ======== Worker loop ========
+while (($line = fgets(STDIN)) !== false) {
+    $line = trim($line);
+    if ($line === '') continue;
 
-    $token = $client->fetchAccessTokenWithAssertion();
-    $accessToken = $token['access_token'];
+    file_put_contents('/tmp/mqtt_debug.log', "DAPAT: $line\n", FILE_APPEND);
 
-    $url = "https://fcm.googleapis.com/v1/projects/$projectId/messages:send";
+    if (strpos($line, ' ') === false) continue;
+    [$topic, $payload] = explode(' ', $line, 2);
 
-    $payload = [
-        "message" => [
-            "token" => $deviceToken,
-            "android" => [
-                "priority" => "HIGH",
-                "notification" => [
-                    "title" => $title,
-                    "body" => $body,
-                    "channel_id" => "alert_channel",
-                    "sound" => $sound
-                ]
-            ],
-            "data" => $data
-        ]
-    ];
+    $parts = explode('/', $payload);
+    if (count($parts) !== 5) continue;
 
-    // LOG ke /tmp
-    file_put_contents('/tmp/fcm_payload.log', json_encode($payload, JSON_PRETTY_PRINT) . "\n\n", FILE_APPEND);
+    if (!ctype_digit($parts[0]) || !ctype_digit($parts[1]) || !ctype_digit($parts[2]) || !ctype_digit($parts[4])) {
+        continue;
+    }
 
-    $ch = curl_init($url);
-    curl_setopt_array($ch, [
-        CURLOPT_POST => true,
-        CURLOPT_HTTPHEADER => [
-            "Authorization: Bearer $accessToken",
-            "Content-Type: application/json"
-        ],
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_POSTFIELDS => json_encode($payload)
-    ]);
+    // Validasi string username
+    if ($parts[3] === '' || strlen($parts[3]) > 100) continue;
 
-    $response = curl_exec($ch);
-    curl_close($ch);
+    $user_id          = (int)$parts[0];
+    $smartcategory_id = (int)$parts[1];
+    $mqtt_number      = (int)$parts[2];
+    $mqtt_username    = $parts[3];
+    $mqtt_tipe        = (int)$parts[4];
 
-    // LOG response juga
-    file_put_contents('/tmp/fcm_payload.log', "RESPONSE:\n$response\n\n", FILE_APPEND);
+    // ======== Simpan ke DB ========
+    $stmt = $db->prepare("
+        INSERT INTO mqtt (
+            mqtt_topic,
+            mqtt_payload,
+            user_id,
+            smartcategory_id,
+            mqtt_number,
+            mqtt_created_at,
+            mqtt_username,
+            mqtt_tipe
+        ) VALUES (?, ?, ?, ?, ?, NOW(), ?, ?)
+    ");
+    $stmt->bind_param(
+        "ssiiisi",
+        $topic,
+        $payload,
+        $user_id,
+        $smartcategory_id,
+        $mqtt_number,
+        $mqtt_username,
+        $mqtt_tipe
+    );
+    $stmt->execute();
+    $stmt->close();
 
-    echo "FCM RESPONSE: $response\n";
+    // ======== Ambil token user ========
+    $tokens = [];
+    $stmt = $db->prepare("SELECT fcmtokens_token FROM fcmtokens WHERE user_id = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $tokens[] = $row['fcmtokens_token'];
+    }
+    $stmt->close();
 
-    return $response;
+    if (empty($tokens)) {
+        file_put_contents('/tmp/mqtt_debug.log', "NO TOKEN FOR USER $user_id\n", FILE_APPEND);
+        continue;
+    }
+
+    // ======== FCM Notification ========
+    foreach ($tokens as $token) {
+        if ($mqtt_tipe === 0) {
+            $sound = "alarm.wav"; // pastikan file ada di res/raw di Android
+            $title = "🚨 ALERT SENSOR";
+            $body  = "Sensor aktif oleh $mqtt_username (Device #$mqtt_number)";
+        } else {
+            $sound = "biasa.wav";
+            $title = "ℹ️ EVENT SISTEM";
+            $body  = "Aktivitas non-sensor oleh $mqtt_username";
+        }
+
+        $fcm_res = fcm_send(
+            $sound,
+            $token,
+            $title,
+            $body,
+            [
+                'user_id' => (string)$user_id,
+                'smartcategory_id' => (string)$smartcategory_id,
+                'mqtt_number' => (string)$mqtt_number,
+                'mqtt_username' => $mqtt_username,
+                'mqtt_tipe' => (string)$mqtt_tipe
+            ]
+        );
+
+        file_put_contents(
+            '/tmp/mqtt_debug.log',
+            date('Y-m-d H:i:s') . " - FCM SENT TO $token : $fcm_res\n",
+            FILE_APPEND
+        );
+    }
 }
