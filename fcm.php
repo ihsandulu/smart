@@ -36,7 +36,7 @@ function fcm_send($sound, $deviceToken, $title, $body, $data = [])
     // ===========================
     // LOG PAYLOAD KE FILE
     // ===========================
-    file_put_contents('/tmp/fcm_payload.log', json_encode($payload, JSON_PRETTY_PRINT) . "\n", FILE_APPEND);
+    file_put_contents('/home/smart.qithy.com/public_html/writable/logs/fcm_payload.log', json_encode($payload, JSON_PRETTY_PRINT) . "\n", FILE_APPEND);
 
     $ch = curl_init($url);
     curl_setopt_array($ch, [
@@ -54,7 +54,7 @@ function fcm_send($sound, $deviceToken, $title, $body, $data = [])
     // ===========================
     // LOG RESPONSE JUGA
     // ===========================
-    file_put_contents('/tmp/fcm_payload.log', "RESPONSE:\n" . $response . "\n\n", FILE_APPEND);
+    file_put_contents('/home/smart.qithy.com/public_html/writable/logs/fcm_payload.log', "RESPONSE:\n" . $response . "\n\n", FILE_APPEND);
 
     curl_close($ch);
 
