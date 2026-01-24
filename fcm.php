@@ -17,7 +17,7 @@ function fcm_send($sound, $deviceToken, $title, $body, $data = [])
 
     $url = "https://fcm.googleapis.com/v1/projects/$projectId/messages:send";
 
-    $payload = [
+    /*  $payload = [
         "message" => [
             "token" => $deviceToken,
 
@@ -36,7 +36,24 @@ function fcm_send($sound, $deviceToken, $title, $body, $data = [])
 
             "data" => $data
         ]
+    ]; */
+
+    $payload = [
+        "message" => [
+            "token" => $deviceToken,
+            "android" => [
+                "notification" => [
+                    "title" => $title,
+                    "body" => $body,
+                    "sound" => $sound,        // alarm.wav
+                    "channel_id" => "alert_channel",
+                    "priority" => "HIGH"
+                ]
+            ],
+            "data" => $data
+        ]
     ];
+
 
 
 
