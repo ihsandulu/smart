@@ -17,27 +17,6 @@ function fcm_send($sound, $deviceToken, $title, $body, $data = [])
 
     $url = "https://fcm.googleapis.com/v1/projects/$projectId/messages:send";
 
-    /*  $payload = [
-        "message" => [
-            "token" => $deviceToken,
-
-            "notification" => [
-                "title" => $title,
-                "body"  => $body
-            ],
-
-            "android" => [
-                "priority" => "HIGH",
-                "notification" => [
-                    "channel_id" => "alert_channel",
-                    "sound" => $sound
-                ]
-            ],
-
-            "data" => $data
-        ]
-    ]; */
-
     $payload = [
         "message" => [
             "token" => $deviceToken,
@@ -54,10 +33,10 @@ function fcm_send($sound, $deviceToken, $title, $body, $data = [])
         ]
     ];
 
-
-
-
-
+    // ===========================
+    // LOG PAYLOAD KE FILE
+    // ===========================
+    file_put_contents('/tmp/fcm_payload.log', json_encode($payload, JSON_PRETTY_PRINT) . "\n", FILE_APPEND);
 
     $ch = curl_init($url);
     curl_setopt_array($ch, [
@@ -71,6 +50,12 @@ function fcm_send($sound, $deviceToken, $title, $body, $data = [])
     ]);
 
     $response = curl_exec($ch);
+
+    // ===========================
+    // LOG RESPONSE JUGA
+    // ===========================
+    file_put_contents('/tmp/fcm_payload.log', "RESPONSE:\n" . $response . "\n\n", FILE_APPEND);
+
     curl_close($ch);
 
     return $response;
