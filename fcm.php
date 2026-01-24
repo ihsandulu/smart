@@ -22,7 +22,7 @@ function fcm_send($mqtt_tipe, $deviceToken, $title, $body, $data = [])
             "token" => $deviceToken,
 
             "notification" => [
-                "type" => $mqtt_tipe,
+                "typex" => $mqtt_tipe,
                 "title" => $title,
                 "body"  => $body
             ],
