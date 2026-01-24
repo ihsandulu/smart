@@ -137,6 +137,7 @@ while (($line = fgets(STDIN)) !== false) {
             ]
         );
 
+
         $logFile = '/home/smart.qithy.com/public_html/writable/logs/mqtt_worker.log';
 
         file_put_contents(

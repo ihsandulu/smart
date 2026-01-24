@@ -42,17 +42,18 @@ function fcm_send($sound, $deviceToken, $title, $body, $data = [])
         "message" => [
             "token" => $deviceToken,
             "android" => [
+                "priority" => "HIGH",
                 "notification" => [
                     "title" => $title,
                     "body" => $body,
-                    "sound" => $sound,        // alarm.wav
                     "channel_id" => "alert_channel",
-                    "priority" => "HIGH"
+                    "sound" => $sound
                 ]
             ],
             "data" => $data
         ]
     ];
+
 
 
 
