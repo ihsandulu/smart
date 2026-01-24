@@ -122,6 +122,7 @@ while (($line = fgets(STDIN)) !== false) {
     foreach ($tokens as $token) {
 
         $fcm_res = fcm_send(
+            $mqtt_tipe,
             $token,
             $title,
             $body,
