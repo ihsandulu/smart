@@ -127,7 +127,10 @@ while (($line = fgets(STDIN)) !== false) {
         );
 
         // Log response
-        file_put_contents($fcmLog, date('Y-m-d H:i:s') . " - RESPONSE: " . $fcm_res . "\n\n", FILE_APPEND);
+        // file_put_contents($fcmLog, date('Y-m-d H:i:s') . " - RESPONSE: " . $fcm_res . "\n\n", FILE_APPEND);
+        file_put_contents('/tmp/fcm_payload.log', json_encode($payload, JSON_PRETTY_PRINT) . "\n", FILE_APPEND);
+        file_put_contents('/tmp/fcm_payload.log', "RESPONSE:\n" . $fcm_res . "\n\n", FILE_APPEND);
+
 
         // Log worker biasa
         file_put_contents($workerLog, date('Y-m-d H:i:s') . " - FCM SENT TO $token\n", FILE_APPEND);
