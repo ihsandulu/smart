@@ -3,7 +3,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 use Google\Client;
 
-function fcm_send($mqtt_tipe, $deviceToken, $title, $body, $data = [])
+function fcm_send($sound, $deviceToken, $title, $body, $data = [])
 {
     $projectId = 'mqtt-89ea3';
     $serviceAccount = __DIR__ . '/mqtt-89ea3-firebase-adminsdk-fbsvc-ce15f1d356.json';
@@ -22,7 +22,6 @@ function fcm_send($mqtt_tipe, $deviceToken, $title, $body, $data = [])
             "token" => $deviceToken,
 
             "notification" => [
-                "typex" => $mqtt_tipe,
                 "title" => $title,
                 "body"  => $body
             ],
@@ -31,7 +30,7 @@ function fcm_send($mqtt_tipe, $deviceToken, $title, $body, $data = [])
                 "priority" => "HIGH",
                 "notification" => [
                     "channel_id" => "alert_channel",
-                    "sound" => "default"
+                    "sound" => $sound
                 ]
             ],
 

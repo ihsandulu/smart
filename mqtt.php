@@ -112,9 +112,11 @@ while (($line = fgets(STDIN)) !== false) {
     /* ================== TAMBAHAN FCM ================== */
 
     if ($mqtt_tipe === 0) {
+        $sound = "alarm.wav";
         $title = "🚨 ALERT SENSOR";
         $body  = "Sensor aktif oleh $mqtt_username (Device #$mqtt_number)";
     } else {
+        $sound = "biasa.wav";
         $title = "ℹ️ EVENT SISTEM";
         $body  = "Aktivitas non-sensor oleh $mqtt_username";
     }
@@ -122,7 +124,7 @@ while (($line = fgets(STDIN)) !== false) {
     foreach ($tokens as $token) {
 
         $fcm_res = fcm_send(
-            $mqtt_tipe,
+            $sound,
             $token,
             $title,
             $body,
