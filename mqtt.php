@@ -3,21 +3,17 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 /* ================== TAMBAHAN ================== */
-require __DIR__ . '/fcm.php';
-
-/**
- * sementara hardcode
- * (nanti bisa ambil dari DB berdasarkan user_id)
- */
-// $DEVICE_TOKEN_ANDROID = 'ISI_TOKEN_ANDROID';
+require __DIR__ . '/fcm.php';  // versi debug-ready
 /* ============================================== */
 
+// ======== Koneksi DB ========
 $db = new mysqli("localhost", "smart_smart", "%w5K6b*OE@Ea!GnG", "smart_smart");
 if ($db->connect_error) {
     file_put_contents('/tmp/mqtt_debug.log', "DB ERROR\n", FILE_APPEND);
     exit;
 }
 
+// ======== Worker loop ========
 while (($line = fgets(STDIN)) !== false) {
     $line = trim($line);
     if ($line === '') continue;
@@ -25,32 +21,25 @@ while (($line = fgets(STDIN)) !== false) {
     file_put_contents('/tmp/mqtt_debug.log', "DAPAT: $line\n", FILE_APPEND);
 
     if (strpos($line, ' ') === false) continue;
-
     [$topic, $payload] = explode(' ', $line, 2);
 
     $parts = explode('/', $payload);
     if (count($parts) !== 5) continue;
 
-    if (
-        !ctype_digit($parts[0]) ||
-        !ctype_digit($parts[1]) ||
-        !ctype_digit($parts[2]) ||
-        !ctype_digit($parts[4])
-    ) {
+    if (!ctype_digit($parts[0]) || !ctype_digit($parts[1]) || !ctype_digit($parts[2]) || !ctype_digit($parts[4])) {
         continue;
     }
 
-    /* validasi string username */
-    if ($parts[3] === '' || strlen($parts[3]) > 100) {
-        continue;
-    }
+    // Validasi string username
+    if ($parts[3] === '' || strlen($parts[3]) > 100) continue;
 
-    $user_id            = (int)$parts[0];
-    $smartcategory_id   = (int)$parts[1];
-    $mqtt_number        = (int)$parts[2];
-    $mqtt_username      = $parts[3];
-    $mqtt_tipe          = (int)$parts[4];
+    $user_id          = (int)$parts[0];
+    $smartcategory_id = (int)$parts[1];
+    $mqtt_number      = (int)$parts[2];
+    $mqtt_username    = $parts[3];
+    $mqtt_tipe        = (int)$parts[4];
 
+    // ======== Simpan ke DB ========
     $stmt = $db->prepare("
         INSERT INTO mqtt (
             mqtt_topic,
@@ -63,7 +52,6 @@ while (($line = fgets(STDIN)) !== false) {
             mqtt_tipe
         ) VALUES (?, ?, ?, ?, ?, NOW(), ?, ?)
     ");
-
     $stmt->bind_param(
         "ssiiisi",
         $topic,
@@ -74,54 +62,36 @@ while (($line = fgets(STDIN)) !== false) {
         $mqtt_username,
         $mqtt_tipe
     );
-
     $stmt->execute();
     $stmt->close();
 
-    /* ================== AMBIL TOKEN DARI DB ================== */
-
+    // ======== Ambil token user ========
     $tokens = [];
-
-    $stmt = $db->prepare("
-    SELECT fcmtokens_token
-    FROM fcmtokens
-    WHERE user_id = ?
-");
+    $stmt = $db->prepare("SELECT fcmtokens_token FROM fcmtokens WHERE user_id = ?");
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
-
     while ($row = $result->fetch_assoc()) {
         $tokens[] = $row['fcmtokens_token'];
     }
-
     $stmt->close();
 
-    /* jika user belum punya device */
     if (empty($tokens)) {
-        file_put_contents(
-            WRITEPATH . 'logs/mqtt_worker.log',
-            "NO TOKEN FOR USER $user_id\n",
-            FILE_APPEND
-        );
+        file_put_contents('/tmp/mqtt_debug.log', "NO TOKEN FOR USER $user_id\n", FILE_APPEND);
         continue;
     }
 
-
-
-    /* ================== TAMBAHAN FCM ================== */
-
-    if ($mqtt_tipe === 0) {
-        $sound = "alarm.wav";
-        $title = "🚨 ALERT SENSOR";
-        $body  = "Sensor aktif oleh $mqtt_username (Device #$mqtt_number)";
-    } else {
-        $sound = "biasa.wav";
-        $title = "ℹ️ EVENT SISTEM";
-        $body  = "Aktivitas non-sensor oleh $mqtt_username";
-    }
-
+    // ======== FCM Notification ========
     foreach ($tokens as $token) {
+        if ($mqtt_tipe === 0) {
+            $sound = "alarm.wav"; // pastikan file ada di res/raw di Android
+            $title = "🚨 ALERT SENSOR";
+            $body  = "Sensor aktif oleh $mqtt_username (Device #$mqtt_number)";
+        } else {
+            $sound = "biasa.wav";
+            $title = "ℹ️ EVENT SISTEM";
+            $body  = "Aktivitas non-sensor oleh $mqtt_username";
+        }
 
         $fcm_res = fcm_send(
             $sound,
@@ -129,25 +99,18 @@ while (($line = fgets(STDIN)) !== false) {
             $title,
             $body,
             [
-                'user_id'           => (string)$user_id,
-                'smartcategory_id'  => (string)$smartcategory_id,
-                'mqtt_number'       => (string)$mqtt_number,
-                'mqtt_username'     => $mqtt_username,
-                'mqtt_tipe'         => (string)$mqtt_tipe,
-                'sound'             => $sound
+                'user_id' => (string)$user_id,
+                'smartcategory_id' => (string)$smartcategory_id,
+                'mqtt_number' => (string)$mqtt_number,
+                'mqtt_username' => $mqtt_username,
+                'mqtt_tipe' => (string)$mqtt_tipe
             ]
         );
 
-
-        $logFile = '/home/smart.qithy.com/public_html/writable/logs/mqtt_worker.log';
-
         file_put_contents(
-            $logFile,
-            "FCM SENT TO $token : $fcm_res\n",
+            '/tmp/mqtt_debug.log',
+            date('Y-m-d H:i:s') . " - FCM SENT TO $token : $fcm_res\n",
             FILE_APPEND
         );
     }
-
-
-    /* ================================================== */
 }

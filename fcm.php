@@ -1,13 +1,11 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
-
 use Google\Client;
 
 function fcm_send($sound, $deviceToken, $title, $body, $data = [])
 {
     $projectId = 'mqtt-89ea3';
     $serviceAccount = __DIR__ . '/mqtt-89ea3-firebase-adminsdk-fbsvc-ce15f1d356.json';
-
     $logFile = __DIR__ . '/writable/logs/fcm_payload.log';
 
     try {
@@ -25,7 +23,6 @@ function fcm_send($sound, $deviceToken, $title, $body, $data = [])
 
         $url = "https://fcm.googleapis.com/v1/projects/$projectId/messages:send";
 
-        // ====== PAYLOAD ======
         $payload = [
             "message" => [
                 "token" => $deviceToken,
@@ -42,7 +39,6 @@ function fcm_send($sound, $deviceToken, $title, $body, $data = [])
             ]
         ];
 
-        // ====== JSON ENCODE DENGAN CEK ERROR ======
         $payloadJson = json_encode($payload, JSON_PRETTY_PRINT);
         if ($payloadJson === false) {
             $errMsg = json_last_error_msg();
@@ -50,10 +46,8 @@ function fcm_send($sound, $deviceToken, $title, $body, $data = [])
             return false;
         }
 
-        // ====== LOG PAYLOAD ======
         file_put_contents($logFile, date('Y-m-d H:i:s') . " - PAYLOAD:\n" . $payloadJson . "\n", FILE_APPEND);
 
-        // ====== CURL ======
         $ch = curl_init($url);
         curl_setopt_array($ch, [
             CURLOPT_POST => true,
@@ -67,7 +61,6 @@ function fcm_send($sound, $deviceToken, $title, $body, $data = [])
 
         $response = curl_exec($ch);
 
-        // ====== LOG RESPONSE ======
         if ($response === false) {
             $curlErr = curl_error($ch);
             file_put_contents($logFile, date('Y-m-d H:i:s') . " - CURL ERROR: $curlErr\n\n", FILE_APPEND);
@@ -76,7 +69,6 @@ function fcm_send($sound, $deviceToken, $title, $body, $data = [])
         }
 
         curl_close($ch);
-
         return $response;
 
     } catch (\Exception $e) {
