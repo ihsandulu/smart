@@ -6,7 +6,9 @@ function fcm_send($sound, $deviceToken, $title, $body, $data = [])
 {
     $projectId = 'mqtt-89ea3';
     $serviceAccount = __DIR__ . '/mqtt-89ea3-firebase-adminsdk-fbsvc-ce15f1d356.json';
-    $logFile = __DIR__ . '/writable/logs/fcm_payload.log';
+    // $logFile = __DIR__ . '/writable/logs/fcm_payload.log';
+    $logFile = '/tmp/fcm_payload.log';
+
 
     try {
         $client = new Client();
