@@ -74,6 +74,28 @@ class api extends BaseController
         ]);
     }
 
+    public function hakakses()
+    {
+        $crud = $this->request->getGET("crud");
+        $val = $this->request->getGET("val");
+        $val = json_decode($val);
+        $position_id = $this->request->getGET("position_id");
+        $pages_id = $this->request->getGET("pages_id");
+        $where["position_id"] = $this->request->getGET("position_id");
+        $where["pages_id"] = $this->request->getGET("pages_id");
+        $cek = $this->db->table('positionpages')->where($where)->get()->getNumRows();
+        if ($cek > 0) {
+            $input1[$crud] = $val;
+            $this->db->table('positionpages')->update($input1, $where);
+            echo $this->db->getLastQuery();
+        } else {
+            $input2["position_id"] = $position_id;
+            $input2["pages_id"] = $pages_id;
+            $input2[$crud] = $val;
+            $this->db->table('positionpages')->insert($input2);
+            echo $this->db->getLastQuery();
+        }
+    }
 
     public function saveToken1()
     {

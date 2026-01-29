@@ -45,14 +45,15 @@ foreach($identity->getResult() as $identity){
     <script src="https:**oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]--> 
 
+    <script src="js/jquery/3.5.1_jquery.min.js"></script>
+    <script src="js/sticky-kit.min.js"></script>
+    <script src="js/jquery.slimscroll.min.js"></script>
+    <script src="js/metisMenu.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap/4.5.2_bootstrap.min.js"></script>
 
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link href="css/select2.min.css" rel="stylesheet" />
+    <script src="js/select2.min.js"></script>
 
 
     <link href="css/lib/toastr/toastr.min.css" rel="stylesheet">
@@ -60,7 +61,7 @@ foreach($identity->getResult() as $identity){
     <script src="js/lib/toastr/toastr.init.js"></script>
 
     <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    src="js/Chart.js">
     </script>
 
 

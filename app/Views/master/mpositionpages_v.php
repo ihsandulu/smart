@@ -67,30 +67,30 @@
                                 </td>
                                 <td class="text-center">0</td>
                                 <td class="text-left">Isi Semua Field</td>
-                                <td><input id="read0" onclick="isisemua('read')" value="1" type="checkbox" > Semua View</td>
-                                <td><input id="create0" onclick="isisemua('create')" value="1" type="checkbox" > Semua Create</td>
-                                <td><input id="update0" onclick="isisemua('update')" value="1" type="checkbox" > Semua Update</td>
-                                <td><input id="delete0" onclick="isisemua('delete')" value="1" type="checkbox" > Semua Delete</td>
-                                <td><input id="approve0" onclick="isisemua('approve')" value="1" type="checkbox" > Semua Approve</td>
+                                <td><input id="read0" onclick="isisemua('read')" value="1" type="checkbox"> Semua View</td>
+                                <td><input id="create0" onclick="isisemua('create')" value="1" type="checkbox"> Semua Create</td>
+                                <td><input id="update0" onclick="isisemua('update')" value="1" type="checkbox"> Semua Update</td>
+                                <td><input id="delete0" onclick="isisemua('delete')" value="1" type="checkbox"> Semua Delete</td>
+                                <td><input id="approve0" onclick="isisemua('approve')" value="1" type="checkbox"> Semua Approve</td>
                             </tr>
                             <script>
                                 const pagesid = [];
                             </script>
                             <?php
-                            $posid=$this->request->getGet("position_id");
+                            $posid = $this->request->getGet("position_id");
                             $usr = $this->db
                                 ->table("pages")
                                 ->select("*,pages.pages_id AS pages_id")
-                                ->join("(SELECT * FROM positionpages WHERE position_id = '".$posid."')positionpages","positionpages.pages_id=pages.pages_id","left")
+                                ->join("(SELECT * FROM positionpages WHERE position_id = '" . $posid . "')positionpages", "positionpages.pages_id=pages.pages_id", "left")
                                 ->orderBy("pages.pages_category", "ASC")
                                 ->orderBy("pages.pages_name", "ASC")
-                                 ->get();
+                                ->get();
                             // echo $this->db->getLastquery();
                             $no = 1;
                             foreach ($usr->getResult() as $usr) { ?>
-                            <script>
-                                pagesid.push("<?= $usr->pages_id; ?>");
-                            </script>
+                                <script>
+                                    pagesid.push("<?= $usr->pages_id; ?>");
+                                </script>
                                 <tr>
                                     <!-- <td><?= $no++; ?></td> -->
                                     <td><?= $usr->pages_id ?></td>
@@ -113,28 +113,30 @@
 </div>
 <div id="testarray"></div>
 <script>
-    function isisemua(crud){
-        let fieldarray='';
-        let isiarray='';
-        let no = <?=$no;?>;
-        let val1 = $('#'+crud+'0').is(":checked");
-        for(let x=0; x<no-1; x++){
-            fieldarray=crud+pagesid[x];
-            let val2 = $('#'+fieldarray).is(":checked");
-            if(val1!=val2){
-                $('#'+fieldarray).click();
+    function isisemua(crud) {
+        let fieldarray = '';
+        let isiarray = '';
+        let no = <?= $no; ?>;
+        let val1 = $('#' + crud + '0').is(":checked");
+        for (let x = 0; x < no - 1; x++) {
+            fieldarray = crud + pagesid[x];
+            let val2 = $('#' + fieldarray).is(":checked");
+            if (val1 != val2) {
+                $('#' + fieldarray).click();
             }
             // isiarray+=pagesid[x];
-        }       
+        }
         // $("#testarray").html(isiarray);
     }
+</script>
+<script>
     function isi(pages_id, position_id, crud) {
         let val = $("#" + crud + pages_id).is(":checked");
         // alert('<?= base_url("api/hakakses"); ?>?pages_id='+pages_id+"&position_id="+position_id+"&crud=positionpages_"+crud+"&val="+val);
         $.get("<?= base_url("api/hakakses"); ?>", {
                 pages_id: pages_id,
                 position_id: position_id,
-                crud: 'positionpages_'+crud,
+                crud: 'positionpages_' + crud,
                 val: $("#" + crud + pages_id).is(":checked")
             })
             .done(function(data) {
@@ -142,10 +144,15 @@
                 toast('Update Akses', 'Update Hak Akses Berhasil!');
             });
     }
+</script>
+<script>
     $(document).ready(function() {
         $('#datatablenya').DataTable({
             "paging": false,
-            "order": [[ 1, "asc" ], [ 2, "asc" ]]
+            "order": [
+                [1, "asc"],
+                [2, "asc"]
+            ]
         });
     });
 </script>

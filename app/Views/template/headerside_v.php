@@ -13,13 +13,13 @@
 
                 </li>
                 <?php
-                // dd(session()->get("position_id")[0][0]);
+                // dd(session()->get());
                 if (
                     (
                         isset(session()->get("position_id")[0][0])
                         && (
                             session()->get("position_id") == "1"
-                            || session()->get("position_id") == "2"
+                            
                         )
                     ) ||
                     (
@@ -34,7 +34,7 @@
                             isset(session()->get("position_id")[0][0])
                             && (
                                 session()->get("position_id") == "1"
-                                || session()->get("position_id") == "2"
+                                
                             )
                         ) ||
                         (
@@ -53,7 +53,7 @@
                             isset(session()->get("position_id")[0][0])
                             && (
                                 session()->get("position_id") == "1"
-                                || session()->get("position_id") == "2"
+                                
                             )
                         ) ||
                         (
@@ -70,7 +70,7 @@
                                         isset(session()->get("position_id")[0][0])
                                         && (
                                             session()->get("position_id") == "1"
-                                            || session()->get("position_id") == "2"
+                                            
                                         )
                                     ) ||
                                     (
@@ -86,7 +86,7 @@
                                         isset(session()->get("position_id")[0][0])
                                         && (
                                             session()->get("position_id") == "1"
-                                            || session()->get("position_id") == "2"
+                                            
                                         )
                                     ) ||
                                     (
@@ -106,7 +106,7 @@
                             isset(session()->get("position_id")[0][0])
                             && (
                                 session()->get("position_id") == "1"
-                                || session()->get("position_id") == "2"
+                                
                             )
                         ) ||
                         (
@@ -119,6 +119,48 @@
                         </li>
                     <?php } ?>
 
+                    <?php
+                    if (
+                        (
+                            isset(session()->get("position_id")[0][0])
+                            && (
+                                session()->get("position_id") == "1"
+                                
+                            )
+                        ) ||
+                        (
+                            isset(session()->get("halaman")['124']['act_read'])
+                            && session()->get("halaman")['124']['act_read'] == "1"
+                        )
+                    ) { ?>
+                        <li>
+                            <a class="<?= current_url(true)->getSegment(1) == 'mproduct' ? 'active' : ''; ?>" href="<?= base_url("mproduct"); ?>" aria-expanded="false"><i class="fa fa-building"></i><span class="hide-menu">Product</span></a>
+                        </li>
+                    <?php } ?>
+
+
+                    <!-- Start Smart Home -->
+<hr />
+                    <li class="nav-label">Antam Boot</li>
+                    <?php
+                    if (
+                        (
+                            isset(session()->get("position_id")[0][0])
+                            && (
+                                session()->get("position_id") == "1"
+                                
+                            )
+                        ) ||
+                        (
+                            isset(session()->get("halaman")['125']['act_read'])
+                            && session()->get("halaman")['125']['act_read'] == "1"
+                        )
+                    ) { ?>
+                        <li>
+                            <a class="<?= current_url(true)->getSegment(1) == 'antam' ? 'active' : ''; ?>" href="<?= base_url("antam"); ?>" aria-expanded="false"><i class="fa fa-building"></i><span class="hide-menu">User</span></a>
+                        </li>
+                    <?php } ?>
+
                     <!-- Start Smart Home -->
                     <hr />
                     <li class="nav-label">Smart Home</li>
@@ -128,7 +170,7 @@
                             isset(session()->get("position_id")[0][0])
                             && (
                                 session()->get("position_id") == "1"
-                                || session()->get("position_id") == "2"
+                                
                             )
                         ) ||
                         (
@@ -150,7 +192,7 @@
                             isset(session()->get("position_id")[0][0])
                             && (
                                 session()->get("position_id") == "1"
-                                || session()->get("position_id") == "2"
+                                
                             )
                         ) ||
                         (
@@ -172,7 +214,7 @@
                             isset(session()->get("position_id")[0][0])
                             && (
                                 session()->get("position_id") == "1"
-                                || session()->get("position_id") == "2"
+                                
                             )
                         ) ||
                         (
@@ -191,7 +233,7 @@
                             isset(session()->get("position_id")[0][0])
                             && (
                                 session()->get("position_id") == "1"
-                                || session()->get("position_id") == "2"
+                                
                             )
                         ) ||
                         (
@@ -210,7 +252,7 @@
                             isset(session()->get("position_id")[0][0])
                             && (
                                 session()->get("position_id") == "1"
-                                || session()->get("position_id") == "2"
+                                
                             )
                         ) ||
                         (
@@ -235,7 +277,7 @@
                         isset(session()->get("position_id")[0][0])
                         && (
                             session()->get("position_id") == "1"
-                            || session()->get("position_id") == "2"
+                            
                         )
                     ) ||
                     (
@@ -244,14 +286,13 @@
                     )
                 ) { ?>
                     <li class="nav-label">Transaksi</li>
-                    <li class="nav-label">Sales</li>
                     <?php
                     if (
                         (
                             isset(session()->get("position_id")[0][0])
                             && (
                                 session()->get("position_id") == "1"
-                                || session()->get("position_id") == "2"
+                                
                             )
                         ) ||
                         (
@@ -287,7 +328,7 @@
                         isset(session()->get("position_id")[0][0])
                         && (
                             session()->get("position_id") == "1"
-                            || session()->get("position_id") == "2"
+                            
                         )
                     ) ||
                     (
@@ -304,7 +345,7 @@
                                     isset(session()->get("position_id")[0][0])
                                     && (
                                         session()->get("position_id") == "1"
-                                        || session()->get("position_id") == "2"
+                                        
                                     )
                                 ) ||
                                 (
@@ -323,7 +364,7 @@
                             isset(session()->get("position_id")[0][0])
                             && (
                                 session()->get("position_id") == "1"
-                                || session()->get("position_id") == "2"
+                                
                             )
                         ) ||
                         (

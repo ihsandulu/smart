@@ -51,11 +51,10 @@ class login_m extends core_m
                     // echo $this->request->getVar("password") . " ==> " . $decrypted;die;
                     if ($this->request->getVar("password") == $decrypted) {
 
-                        // echo $user->user_name;die;
+                        // echo $user->position_id;die;
                         $this->session->set("id", $user->id);
                         $this->session->set("user_name", $user->user_name);
                         $this->session->set("position_id", $user->position_id);
-                        $this->session->set("position_administrator", $user->position_id);
                         $this->session->set("user_picture", $user->user_picture);
                         $this->session->set("identity_id", $identity->identity_id);
                         $this->session->set("identity_name", $identity->identity_name);
