@@ -101,6 +101,7 @@ while (($line = fgets(STDIN)) !== false) {
 
         $fcm_res = fcm_send($sound, $token, $title, $body, [
             'user_id'           => (string)$user_id,
+            'user_name'           => (string)$mqtt_username,
             'smartcategory_id'  => (string)$smartcategory_id,
             'mqtt_number'       => (string)$mqtt_number,
             'mqtt_username'     => $mqtt_username,
