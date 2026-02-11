@@ -169,56 +169,67 @@ class api extends BaseController
     }
 
     public function user()
-{
-    $email = $this->request->getGet('email');
-    $password = $this->request->getGet('password');
+    {
 
-    $user = $this->db->table('user')
-        ->where('user_email', $email)
-        ->get()
-        ->getRow();
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
-    if (!$user) {
+        // ===== HANDLE PREFLIGHT OPTIONS =====
+        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            return $this->response->setStatusCode(200);
+        }
+
+
+        $email = $this->request->getGet('email');
+        $password = $this->request->getGet('password');
+
+        $user = $this->db->table('user')
+            ->where('user_email', $email)
+            ->get()
+            ->getRow();
+
+        if (!$user) {
+            return $this->response->setJSON([
+                'status' => false,
+                'message' => 'User tidak ditemukan',
+                'total' => 0,
+                'data' => []
+            ]);
+        }
+
+        // ===== Decrypt Password =====
+        $key = "ihsandulu123456";
+        $method = "AES-256-CBC";
+
+        $raw = base64_decode($user->user_password);
+        $iv = substr($raw, 0, openssl_cipher_iv_length($method));
+        $enc = substr($raw, openssl_cipher_iv_length($method));
+
+        $decrypted = openssl_decrypt($enc, $method, $key, 0, $iv);
+
+        if ($decrypted !== $password) {
+            return $this->response->setJSON([
+                'status' => false,
+                'message' => 'Password salah',
+                'total' => 0,
+                'data' => []
+            ]);
+        }
+
+        // ===== Hanya kirim field tertentu =====
+        $data = [
+            'id' => $user->id,
+            'user_name' => $user->user_name
+        ];
+
         return $this->response->setJSON([
-            'status' => false,
-            'message' => 'User tidak ditemukan',
-            'total' => 0,
-            'data' => []
+            'status' => true,
+            'message' => 'Data ditemukan',
+            'total' => 1,
+            'data' => [$data]
         ]);
     }
-
-    // ===== Decrypt Password =====
-    $key = "ihsandulu123456";
-    $method = "AES-256-CBC";
-
-    $raw = base64_decode($user->user_password);
-    $iv = substr($raw, 0, openssl_cipher_iv_length($method));
-    $enc = substr($raw, openssl_cipher_iv_length($method));
-
-    $decrypted = openssl_decrypt($enc, $method, $key, 0, $iv);
-
-    if ($decrypted !== $password) {
-        return $this->response->setJSON([
-            'status' => false,
-            'message' => 'Password salah',
-            'total' => 0,
-            'data' => []
-        ]);
-    }
-
-    // ===== Hanya kirim field tertentu =====
-    $data = [
-        'id' => $user->id,
-        'user_name' => $user->user_name
-    ];
-
-    return $this->response->setJSON([
-        'status' => true,
-        'message' => 'Data ditemukan',
-        'total' => 1,
-        'data' => [$data]
-    ]);
-}
 
     public function userantam()
     {
