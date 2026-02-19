@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
+
 use Google\Client;
 
 function fcm_send($sound, $deviceToken, $title, $body, $data = [])
@@ -27,12 +28,18 @@ function fcm_send($sound, $deviceToken, $title, $body, $data = [])
                     "title" => $title,
                     "body" => $body,
                     "channel_id" => "alert_channel",
-                    "sound" => $sound
+                    "sound" => "default"  // pakai default supaya bunyi walau app belum jalan
                 ]
             ],
-            "data" => $data
+            // data tetap disertakan untuk JS
+            "data" => array_merge($data, [
+                "title" => $title,
+                "body" => $body,
+                "sound" => $sound
+            ])
         ]
     ];
+
 
     // LOG ke /tmp
     file_put_contents('/tmp/fcm_payload.log', json_encode($payload, JSON_PRETTY_PRINT) . "\n\n", FILE_APPEND);
