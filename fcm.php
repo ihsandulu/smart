@@ -26,18 +26,19 @@ function fcm_send($sound, $deviceToken, $title, $body, $data = [])
                 "priority" => "HIGH",
                 "notification" => [
                     "title" => "🚨 ALERT SENSOR",
-                    "body" => "Sensor aktif oleh Alarm Pak Amir 1 (Device #1)",
-                    "channel_id" => "alarm_channel_v2",
-                    "sound" => "alarm.wav"       // insyaAllah bunyi custom
+                    "body" => "Sensor aktif oleh Alarm Pak Amir 1",
+                    "channel_id" => "alarm_channel",  // harus sama dengan JS channel ID
+                    "sound" => "alarm"                // nama file tanpa ekstensi
                 ]
             ],
             "data" => array_merge($data, [
                 "title" => "🚨 ALERT SENSOR",
-                "body" => "Sensor aktif oleh Alarm Pak Amir 1 (Device #1)",
-                "sound" => "alarm.wav"
+                "body"  => "Sensor aktif oleh Alarm Pak Amir 1",
+                "sound" => "alarm"
             ])
         ]
     ];
+
 
 
 
