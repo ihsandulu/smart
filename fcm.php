@@ -27,7 +27,7 @@ function fcm_send($sound, $deviceToken, $title, $body, $data = [])
                 "notification" => [
                     "title" => $title,
                     "body" => $body,
-                    "channel_id" => "alert_channel",
+                    "channel_id" => "alarm_channel",
                     "sound" => "default"  // pakai default supaya bunyi walau app belum jalan
                 ]
             ],
