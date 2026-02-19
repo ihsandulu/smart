@@ -27,7 +27,7 @@ function fcm_send($sound, $deviceToken, $title, $body, $data = [])
                 "notification" => [
                     "title" => "🚨 ALERT SENSOR",
                     "body" => "Sensor aktif oleh Alarm Pak Amir 1 (Device #1)",
-                    "channel_id" => "alarm_channel",
+                    "channel_id" => "alarm_channel_v2",
                     "sound" => "alarm.wav"       // insyaAllah bunyi custom
                 ]
             ],
