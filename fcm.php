@@ -25,20 +25,20 @@ function fcm_send($sound, $deviceToken, $title, $body, $data = [])
             "android" => [
                 "priority" => "HIGH",
                 "notification" => [
-                    "title" => $title,
-                    "body" => $body,
+                    "title" => "🚨 ALERT SENSOR",
+                    "body" => "Sensor aktif oleh Alarm Pak Amir 1 (Device #1)",
                     "channel_id" => "alarm_channel",
-                    "sound" => "default"  // pakai default supaya bunyi walau app belum jalan
+                    "sound" => "alarm.wav"       // insyaAllah bunyi custom
                 ]
             ],
-            // data tetap disertakan untuk JS
             "data" => array_merge($data, [
-                "title" => $title,
-                "body" => $body,
-                "sound" => $sound
+                "title" => "🚨 ALERT SENSOR",
+                "body" => "Sensor aktif oleh Alarm Pak Amir 1 (Device #1)",
+                "sound" => "alarm.wav"
             ])
         ]
     ];
+
 
 
     // LOG ke /tmp
